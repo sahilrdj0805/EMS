@@ -1,4 +1,4 @@
-import { DEPARTMENTS } from "../constants/departments.js";
+import Department from "../models/Department.js";
 import Attendance from "../models/Attendance.js";
 import Employee from "../models/Employee.js";
 import LeaveApplication from "../models/LeaveApplication.js";
@@ -10,7 +10,7 @@ export const getDashboard  = async (req, res) => {
     try {
         const session = req.session;
         if(session.role === "ADMIN"){
-            const [totalEmployees, todayAttendance, pendingLeaves] = await Promise.all([
+            const [totalEmployees, todayAttendance, pendingLeaves, totalDepartments] = await Promise.all([
                 Employee.countDocuments({isDeleted: { $ne: true }}),
                 Attendance.countDocuments({
                     date: {
@@ -18,13 +18,14 @@ export const getDashboard  = async (req, res) => {
                         $lt: new Date(new Date().setHours(24,0,0,0)),
                     }
                 }),
-                LeaveApplication.countDocuments({status: "PENDING" })
+                LeaveApplication.countDocuments({status: "PENDING" }),
+                Department.countDocuments()
             ])
 
             return res.json({
                 role: "ADMIN",
                 totalEmployees,
-                totalDepartments: DEPARTMENTS.length,
+                totalDepartments,
                 todayAttendance,
                 pendingLeaves
             })
