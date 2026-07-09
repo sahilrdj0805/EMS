@@ -1,100 +1,131 @@
-import { ArrowRightIcon, ShieldIcon, UserIcon, Building2Icon } from "lucide-react"
+import { ArrowRightIcon, ShieldCheckIcon, UserIcon, Building2Icon, SparklesIcon } from "lucide-react"
 import { Link, Navigate } from "react-router-dom"
 import { useAuth } from "../context/AuthContext"
 import Loading from "../components/Loading"
 
 const LoginLanding = () => {
-
     const {user, loading} = useAuth()
 
-  if(loading) return <Loading />
-  if(user) return <Navigate to="/" />
+    if(loading) return <Loading />
+    if(user) return <Navigate to="/dashboard" />
 
     const portalOptions = [
         {
             to: "/login/admin",
             title: "Admin Portal",
             description: "Manage workforce, payroll, and system settings.",
-            icon: ShieldIcon,
-            color: "emerald"
+            icon: ShieldCheckIcon,
+            color: "from-emerald-500 to-teal-500",
+            shadow: "shadow-emerald-500/20"
         },
         {
             to: "/login/employee",
             title: "Employee Portal",
             description: "Access attendance, time off, and payslips.",
             icon: UserIcon,
-            color: "teal"
+            color: "from-blue-500 to-indigo-500",
+            shadow: "shadow-blue-500/20"
         }
     ]
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-slate-900 via-slate-950 to-slate-900 flex items-center justify-center p-4 relative overflow-hidden">
+    <div className="min-h-screen bg-slate-950 flex items-center justify-center p-4 relative overflow-hidden selection:bg-emerald-500/30">
         
-        {/* Background Decorative Elements */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full max-w-7xl overflow-hidden pointer-events-none">
-            <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-emerald-500/20 rounded-full blur-3xl mix-blend-screen animate-pulse"></div>
-            <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-teal-500/10 rounded-full blur-3xl mix-blend-screen"></div>
+        {/* Abstract Background Effects */}
+        <div className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none">
+            <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-emerald-500/20 rounded-full blur-[120px] mix-blend-screen animate-pulse" style={{ animationDuration: '8s' }}></div>
+            <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-blue-500/20 rounded-full blur-[120px] mix-blend-screen animate-pulse" style={{ animationDuration: '10s' }}></div>
+            <div className="absolute top-[40%] left-[50%] -translate-x-1/2 w-[60%] h-[20%] bg-teal-500/10 rounded-full blur-[100px] mix-blend-screen"></div>
+            
+            {/* Grid Pattern */}
+            <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMSIgY3k9IjEiIHI9IjEiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4wMykiLz48L3N2Zz4=')] [mask-image:radial-gradient(ellipse_at_center,black_40%,transparent_80%)]"></div>
         </div>
 
-        <div className="w-full max-w-5xl bg-white/5 backdrop-blur-2xl border border-white/10 rounded-[2.5rem] shadow-2xl overflow-hidden relative z-10 flex flex-col md:flex-row">
+        <div className="w-full max-w-6xl relative z-10 flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
             
             {/* Left Side - Brand & Info */}
-            <div className="w-full md:w-5/12 p-8 md:p-12 lg:p-16 flex flex-col justify-between border-b md:border-b-0 md:border-r border-white/10 bg-linear-to-b from-white/5 to-transparent">
-                <div>
-                    <div className="w-12 h-12 rounded-2xl bg-linear-to-br from-emerald-400 to-teal-500 flex items-center justify-center text-white shadow-lg shadow-emerald-500/30 mb-8">
-                        <Building2Icon size={24} />
-                    </div>
-                    <h1 className="text-3xl lg:text-4xl font-bold text-white tracking-tight mb-4">
-                        Modernizing your workforce.
-                    </h1>
-                    <p className="text-slate-400 text-lg leading-relaxed">
-                        A centralized platform to manage attendance, process payroll, and empower your team.
-                    </p>
+            <div className="w-full lg:w-1/2 flex flex-col justify-center text-center lg:text-left animate-fade-in">
+                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 w-fit mx-auto lg:mx-0 mb-8 backdrop-blur-md shadow-xl">
+                    <SparklesIcon className="w-4 h-4 text-emerald-400" />
+                    <span className="text-sm font-medium text-slate-300">Welcome to the future of work</span>
                 </div>
                 
-                <div className="hidden md:block mt-20">
-                    <div className="flex items-center gap-2 text-sm text-slate-500">
-                        <div className="w-2 h-2 rounded-full bg-emerald-500"></div>
-                        Systems Operational
+                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white tracking-tight mb-6 leading-[1.1]">
+                    Employee <br className="hidden lg:block"/>
+                    <span className="text-transparent bg-clip-text bg-linear-to-r from-emerald-400 via-teal-300 to-emerald-400 animate-gradient">
+                        Management System
+                    </span>
+                </h1>
+                
+                <p className="text-slate-400 text-lg sm:text-xl leading-relaxed mb-10 max-w-2xl mx-auto lg:mx-0">
+                    A centralized, AI-powered platform to manage attendance, process payroll, and empower your entire workforce with ease.
+                </p>
+                
+                <div className="flex items-center justify-center lg:justify-start gap-8">
+                    <div className="flex flex-col items-center lg:items-start gap-1">
+                        <span className="text-3xl font-bold text-white">99.9%</span>
+                        <span className="text-sm text-slate-500 font-medium">Uptime Guarantee</span>
+                    </div>
+                    <div className="w-px h-12 bg-white/10"></div>
+                    <div className="flex flex-col items-center lg:items-start gap-1">
+                        <span className="text-3xl font-bold text-white">24/7</span>
+                        <span className="text-sm text-slate-500 font-medium">AI Assistance</span>
                     </div>
                 </div>
             </div>
 
             {/* Right Side - Login Portals */}
-            <div className="w-full md:w-7/12 p-8 md:p-12 lg:p-16 flex flex-col justify-center bg-white">
-                <div className="max-w-md mx-auto w-full">
-                    <h2 className="text-2xl font-bold text-slate-900 mb-2">Welcome Back</h2>
-                    <p className="text-slate-500 mb-10">Select your designated portal to continue securely.</p>
+            <div className="w-full lg:w-1/2 max-w-md mx-auto lg:mx-0 relative">
+                
+                {/* Glass Card */}
+                <div className="relative bg-white/10 backdrop-blur-2xl border border-white/20 rounded-[2rem] p-8 sm:p-10 shadow-2xl overflow-hidden animate-fade-in" style={{ animationDelay: '150ms' }}>
+                    
+                    {/* Inner highlight */}
+                    <div className="absolute inset-0 bg-linear-to-b from-white/10 to-transparent opacity-50 pointer-events-none"></div>
 
-                    <div className="space-y-4">
-                        {portalOptions.map((portal) => (
-                            <Link 
-                                key={portal.to} 
-                                to={portal.to} 
-                                className="group flex items-start gap-5 p-5 sm:p-6 bg-white border-2 border-slate-100 rounded-2xl hover:border-emerald-500 hover:shadow-lg hover:shadow-emerald-500/10 transition-all duration-300"
-                            >
-                                <div className={`w-12 h-12 shrink-0 rounded-xl bg-${portal.color}-50 flex items-center justify-center text-${portal.color}-600 group-hover:scale-110 transition-transform duration-300`}>
-                                    <portal.icon size={24} />
-                                </div>
-                                <div className="flex-1">
-                                    <h3 className="text-lg font-bold text-slate-900 mb-1 flex items-center justify-between">
-                                        {portal.title}
-                                        <ArrowRightIcon className="w-4 h-4 text-slate-300 group-hover:text-emerald-500 group-hover:translate-x-1 transition-all duration-300" />
-                                    </h3>
-                                    <p className="text-sm text-slate-500 leading-relaxed">
-                                        {portal.description}
-                                    </p>
-                                </div>
-                            </Link>
-                        ))}
-                    </div>
+                    <div className="relative z-10">
+                        <div className="w-14 h-14 rounded-2xl bg-linear-to-br from-slate-800 to-slate-900 border border-slate-700 flex items-center justify-center text-white shadow-lg mb-8">
+                            <Building2Icon size={28} className="text-emerald-400" />
+                        </div>
+                        
+                        <h2 className="text-2xl font-bold text-white mb-2">Secure Access</h2>
+                        <p className="text-slate-400 text-sm mb-8">Please select your designated portal to authenticate.</p>
 
-                    <div className="mt-12 pt-8 border-t border-slate-100 text-center">
-                        <p className="text-sm text-slate-400">
-                            Secure access powered by EMS Portal
-                        </p>
+                        <div className="space-y-4">
+                            {portalOptions.map((portal) => (
+                                <Link 
+                                    key={portal.to} 
+                                    to={portal.to} 
+                                    className="group relative flex items-center gap-5 p-4 bg-slate-900/50 hover:bg-slate-800/80 border border-white/5 hover:border-white/10 rounded-2xl transition-all duration-300 overflow-hidden"
+                                >
+                                    {/* Hover gradient background */}
+                                    <div className={`absolute inset-0 bg-linear-to-r ${portal.color} opacity-0 group-hover:opacity-10 transition-opacity duration-300 pointer-events-none`}></div>
+                                    
+                                    <div className={`w-12 h-12 shrink-0 rounded-xl bg-linear-to-br ${portal.color} flex items-center justify-center text-white shadow-lg ${portal.shadow} group-hover:scale-110 transition-transform duration-300 relative z-10`}>
+                                        <portal.icon size={22} />
+                                    </div>
+                                    
+                                    <div className="flex-1 relative z-10">
+                                        <h3 className="text-base font-bold text-slate-200 group-hover:text-white transition-colors mb-0.5">
+                                            {portal.title}
+                                        </h3>
+                                        <p className="text-xs text-slate-500 group-hover:text-slate-400 transition-colors">
+                                            {portal.description}
+                                        </p>
+                                    </div>
+
+                                    <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-white/10 transition-colors relative z-10">
+                                        <ArrowRightIcon className="w-4 h-4 text-slate-400 group-hover:text-white group-hover:translate-x-0.5 transition-all duration-300" />
+                                    </div>
+                                </Link>
+                            ))}
+                        </div>
                     </div>
                 </div>
+
+                {/* Decorative floating elements */}
+                <div className="absolute -top-10 -right-10 w-32 h-32 bg-emerald-500/20 rounded-full blur-2xl animate-pulse pointer-events-none"></div>
+                <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-blue-500/20 rounded-full blur-2xl animate-pulse pointer-events-none" style={{ animationDelay: '1s' }}></div>
             </div>
 
         </div>

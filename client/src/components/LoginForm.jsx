@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import LoginLeftSide from './LoginLeftSide'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, Navigate } from 'react-router-dom'
 import { ArrowLeftIcon, EyeIcon, EyeOffIcon, Loader2Icon } from 'lucide-react'
 import { useAuth } from '../context/AuthContext'
 import toast from 'react-hot-toast'
@@ -12,7 +12,7 @@ const LoginForm = ({role, title, subtitle}) => {
     const [showPassword, setShowPassword] = useState(false)
     const [error, setError] = useState("")
     const [loading, setLoading] = useState(false)
-    const {login} = useAuth()
+    const {login, user, loading: authLoading} = useAuth()
     const navigate = useNavigate()
 
     const handleSubmit = async (e) => {
@@ -28,6 +28,9 @@ const LoginForm = ({role, title, subtitle}) => {
             setLoading(false)
         }
     }
+
+    if (authLoading) return null; // Or a loading spinner if preferred, but it's handled globally mostly.
+    if (user) return <Navigate to="/dashboard" replace />;
 
   return (
     <div className='min-h-screen flex flex-col md:flex-row'>

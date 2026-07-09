@@ -17,6 +17,13 @@ const AIChatbot = () => {
         scrollToBottom();
     }, [messages, loading]);
 
+    useEffect(() => {
+        if (!isOpen) {
+            setMessages([]);
+            setInput('');
+        }
+    }, [isOpen]);
+
     const handleSend = async (messageText) => {
         if (!messageText.trim()) return;
 
