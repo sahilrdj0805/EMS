@@ -14,7 +14,7 @@ const Layout = () => {
                 <Outlet />
             </div>
         </main>
-        {user.role !== "ADMIN" && <AIChatbot />}
+        <AIChatbot />
     </div>
   )
 }
